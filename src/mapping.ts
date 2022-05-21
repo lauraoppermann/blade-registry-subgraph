@@ -18,19 +18,19 @@ import {
   OrgOwnerChangedEvent,
   OrgURLSetEvent
 } from "../generated/BladeRegistry/BladeRegistry"
-import { ExampleEntity } from "../generated/schema"
+import { AppEntity } from "../generated/schema"
 
 export function handleAppNameRegisteredEvent(
   event: AppNameRegisteredEvent
 ): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
-  let entity = ExampleEntity.load(event.transaction.from.toHex())
+  let entity = AppEntity.load(event.params.appID.toString());
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (!entity) {
-    entity = new ExampleEntity(event.transaction.from.toHex())
+    entity = new AppEntity(event.params.appID.toString())
 
     // Entity fields can be set using simple assignments
     entity.count = BigInt.fromI32(0)
@@ -88,46 +88,129 @@ export function handleAppNameRegisteredEvent(
   // - contract.setVersionURL(...)
 }
 
-export function handleAppRegisteredEvent(event: AppRegisteredEvent): void {}
+export function handleAppRegisteredEvent(event: AppRegisteredEvent): void {
+  let entity = AppEntity.load(event.params.appID.toString());
 
-export function handleAppSetOwnerEvent(event: AppSetOwnerEvent): void {}
+  // Entities only exist after they have been saved to the store;
+  // `null` checks allow to create entities on demand
+  if (!entity) {
+    entity = new AppEntity(event.params.appID.toString())
+
+    // Entity fields can be set using simple assignments
+    entity.count = BigInt.fromI32(0)
+  }
+
+  // BigInt and BigDecimal math are supported
+  entity.count = entity.count + BigInt.fromI32(1)
+
+  // Entity fields can be set based on event parameters
+  entity.appID = event.params.appID
+
+  // Entities can be written to the store with `.save()`
+  entity.save()
+}
+
+export function handleAppSetOwnerEvent(event: AppSetOwnerEvent): void {
+  let entity = AppEntity.load(event.params.appID.toString());
+
+  // Entities only exist after they have been saved to the store;
+  // `null` checks allow to create entities on demand
+  if (!entity) {
+    entity = new AppEntity(event.params.appID.toString())
+
+    // Entity fields can be set using simple assignments
+    entity.count = BigInt.fromI32(0)
+  }
+
+  // BigInt and BigDecimal math are supported
+  entity.count = entity.count + BigInt.fromI32(1)
+
+  // Entity fields can be set based on event parameters
+  entity.appID = event.params.appID
+  entity.appOwnerID = event.params.appOwnerID
+
+  // Entities can be written to the store with `.save()`
+  entity.save()
+}
 
 export function handleAppVersionRegisteredEvent(
   event: AppVersionRegisteredEvent
-): void {}
+): void {
+  let entity = AppEntity.load(event.params.appID.toString());
+
+  // Entities only exist after they have been saved to the store;
+  // `null` checks allow to create entities on demand
+  if (!entity) {
+    entity = new AppEntity(event.params.appID.toString())
+
+    // Entity fields can be set using simple assignments
+    entity.count = BigInt.fromI32(0)
+  }
+
+  // BigInt and BigDecimal math are supported
+  entity.count = entity.count + BigInt.fromI32(1)
+
+  // Entity fields can be set based on event parameters
+  entity.appID = event.params.appID
+  entity.appVersionID = event.params.appVersionID
+
+  // Entities can be written to the store with `.save()`
+  entity.save()
+}
 
 export function handleAppVersionURLSetEvent(
   event: AppVersionURLSetEvent
-): void {}
+): void {
+  let entity = AppEntity.load(event.params.appID.toString());
+
+  // Entities only exist after they have been saved to the store;
+  // `null` checks allow to create entities on demand
+  if (!entity) {
+    entity = new AppEntity(event.params.appID.toString())
+
+    // Entity fields can be set using simple assignments
+    entity.count = BigInt.fromI32(0)
+  }
+
+  // BigInt and BigDecimal math are supported
+  entity.count = entity.count + BigInt.fromI32(1)
+
+  // Entity fields can be set based on event parameters
+  entity.appID = event.params.appID
+  entity.appURL = event.params.appURL
+
+  // Entities can be written to the store with `.save()`
+  entity.save()
+}
 
 export function handleIdDelegateRegisteredEvent(
   event: IdDelegateRegisteredEvent
-): void {}
+): void { }
 
 export function handleIdDelegateRevokedEvent(
   event: IdDelegateRevokedEvent
-): void {}
+): void { }
 
 export function handleIdNameRegisteredEvent(
   event: IdNameRegisteredEvent
-): void {}
+): void { }
 
-export function handleIdURLSetEvent(event: IdURLSetEvent): void {}
+export function handleIdURLSetEvent(event: IdURLSetEvent): void { }
 
-export function handleIdentityCreatedEvent(event: IdentityCreatedEvent): void {}
+export function handleIdentityCreatedEvent(event: IdentityCreatedEvent): void { }
 
-export function handleOrgCreatedEvent(event: OrgCreatedEvent): void {}
+export function handleOrgCreatedEvent(event: OrgCreatedEvent): void { }
 
-export function handleOrgMemberAddedEvent(event: OrgMemberAddedEvent): void {}
+export function handleOrgMemberAddedEvent(event: OrgMemberAddedEvent): void { }
 
 export function handleOrgMemberRemovedEvent(
   event: OrgMemberRemovedEvent
-): void {}
+): void { }
 
 export function handleOrgNameRegisteredEvent(
   event: OrgNameRegisteredEvent
-): void {}
+): void { }
 
-export function handleOrgOwnerChangedEvent(event: OrgOwnerChangedEvent): void {}
+export function handleOrgOwnerChangedEvent(event: OrgOwnerChangedEvent): void { }
 
-export function handleOrgURLSetEvent(event: OrgURLSetEvent): void {}
+export function handleOrgURLSetEvent(event: OrgURLSetEvent): void { }

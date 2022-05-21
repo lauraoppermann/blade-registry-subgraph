@@ -1,6 +1,9 @@
-type ExampleEntity @entity {
+type AppEntity @entity {
   id: ID!
-  count: BigInt!
   appID: Bytes! # address
   appName: String! # string
+  appOwnerID: Bytes! # address
+  appVersionID: Bytes! # address
+  appURL: String! # string
+
 }
