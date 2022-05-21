@@ -18,19 +18,19 @@ import {
   OrgOwnerChangedEvent,
   OrgURLSetEvent
 } from "../generated/BladeRegistry/BladeRegistry"
-import { AppEntity } from "../generated/schema"
+import { App } from "../generated/schema"
 
 export function handleAppNameRegisteredEvent(
   event: AppNameRegisteredEvent
 ): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
-  let entity = AppEntity.load(event.params.appID.toString());
+  let entity = App.load(event.params.appID.toString());
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (!entity) {
-    entity = new AppEntity(event.params.appID.toString())
+    entity = new App(event.params.appID.toString())
 
     // Entity fields can be set using simple assignments
     entity.count = BigInt.fromI32(0)
@@ -89,12 +89,12 @@ export function handleAppNameRegisteredEvent(
 }
 
 export function handleAppRegisteredEvent(event: AppRegisteredEvent): void {
-  let entity = AppEntity.load(event.params.appID.toString());
+  let entity = App.load(event.params.appID.toString());
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (!entity) {
-    entity = new AppEntity(event.params.appID.toString())
+    entity = new App(event.params.appID.toString())
 
     // Entity fields can be set using simple assignments
     entity.count = BigInt.fromI32(0)
@@ -111,12 +111,12 @@ export function handleAppRegisteredEvent(event: AppRegisteredEvent): void {
 }
 
 export function handleAppSetOwnerEvent(event: AppSetOwnerEvent): void {
-  let entity = AppEntity.load(event.params.appID.toString());
+  let entity = App.load(event.params.appID.toString());
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (!entity) {
-    entity = new AppEntity(event.params.appID.toString())
+    entity = new App(event.params.appID.toString())
 
     // Entity fields can be set using simple assignments
     entity.count = BigInt.fromI32(0)
@@ -136,12 +136,12 @@ export function handleAppSetOwnerEvent(event: AppSetOwnerEvent): void {
 export function handleAppVersionRegisteredEvent(
   event: AppVersionRegisteredEvent
 ): void {
-  let entity = AppEntity.load(event.params.appID.toString());
+  let entity = App.load(event.params.appID.toString());
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (!entity) {
-    entity = new AppEntity(event.params.appID.toString())
+    entity = new App(event.params.appID.toString())
 
     // Entity fields can be set using simple assignments
     entity.count = BigInt.fromI32(0)
@@ -161,12 +161,12 @@ export function handleAppVersionRegisteredEvent(
 export function handleAppVersionURLSetEvent(
   event: AppVersionURLSetEvent
 ): void {
-  let entity = AppEntity.load(event.params.appID.toString());
+  let entity = App.load(event.params.appID.toString());
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (!entity) {
-    entity = new AppEntity(event.params.appID.toString())
+    entity = new App(event.params.appID.toString())
 
     // Entity fields can be set using simple assignments
     entity.count = BigInt.fromI32(0)

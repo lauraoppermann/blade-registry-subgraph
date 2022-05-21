@@ -1,4 +1,12 @@
-type AppEntity @entity {
+type _Schema_
+  @fulltext(
+    name: "appSearch"
+    language: en
+    algorithm: rank
+    include: [{ entity: "App", fields: [{ name: "appName" }] }]
+  )
+
+type App @entity {
   id: ID!
   appID: Bytes! # address
   appName: String! # string
