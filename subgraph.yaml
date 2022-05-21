@@ -1,0 +1,68 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: BladeRegistry
+    network: ropsten
+    source:
+      address: "0x4f7101c38dbdc10c51d726bf6c840c93c8429fef"
+      abi: BladeRegistry
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AppNameRegisteredEvent
+        - AppRegisteredEvent
+        - AppSetOwnerEvent
+        - AppVersionRegisteredEvent
+        - AppVersionURLSetEvent
+        - IdDelegateRegisteredEvent
+        - IdDelegateRevokedEvent
+        - IdNameRegisteredEvent
+        - IdURLSetEvent
+        - IdentityCreatedEvent
+        - OrgCreatedEvent
+        - OrgMemberAddedEvent
+        - OrgMemberRemovedEvent
+        - OrgNameRegisteredEvent
+        - OrgOwnerChangedEvent
+        - OrgURLSetEvent
+      abis:
+        - name: BladeRegistry
+          file: ./abis/BladeRegistry.json
+      eventHandlers:
+        - event: AppNameRegisteredEvent(indexed address,string)
+          handler: handleAppNameRegisteredEvent
+        - event: AppRegisteredEvent(indexed address)
+          handler: handleAppRegisteredEvent
+        - event: AppSetOwnerEvent(indexed address,address)
+          handler: handleAppSetOwnerEvent
+        - event: AppVersionRegisteredEvent(indexed address,address)
+          handler: handleAppVersionRegisteredEvent
+        - event: AppVersionURLSetEvent(indexed address,string)
+          handler: handleAppVersionURLSetEvent
+        - event: IdDelegateRegisteredEvent(indexed address,address)
+          handler: handleIdDelegateRegisteredEvent
+        - event: IdDelegateRevokedEvent(indexed address,address)
+          handler: handleIdDelegateRevokedEvent
+        - event: IdNameRegisteredEvent(indexed address,string)
+          handler: handleIdNameRegisteredEvent
+        - event: IdURLSetEvent(indexed address,string)
+          handler: handleIdURLSetEvent
+        - event: IdentityCreatedEvent(indexed address)
+          handler: handleIdentityCreatedEvent
+        - event: OrgCreatedEvent(indexed address,address)
+          handler: handleOrgCreatedEvent
+        - event: OrgMemberAddedEvent(indexed address,address)
+          handler: handleOrgMemberAddedEvent
+        - event: OrgMemberRemovedEvent(indexed address,address)
+          handler: handleOrgMemberRemovedEvent
+        - event: OrgNameRegisteredEvent(indexed address,string)
+          handler: handleOrgNameRegisteredEvent
+        - event: OrgOwnerChangedEvent(indexed address,address,address)
+          handler: handleOrgOwnerChangedEvent
+        - event: OrgURLSetEvent(indexed address,string)
+          handler: handleOrgURLSetEvent
+      file: ./src/mapping.ts
